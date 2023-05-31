@@ -1,9 +1,10 @@
-export default function Button({ type, onClick }: { type: "delete" | "add" | "save" | "discard", onClick: () => void }) {
+export default function Button({ type, onClick }: { type: "delete" | "add" | "save" | "discard" | "edit", onClick?: () => void }) {
 	const buttonText = {
 		add: "Add new",
 		delete: "Delete",
 		save: "Save",
-		discard: "Discard"
+		discard: "Discard",
+		edit: "Edit"
 	}
 
 	return (

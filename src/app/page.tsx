@@ -1,11 +1,14 @@
-import Table from "@/components/molecules/table/table"
+import Link from "next/link";
 
 export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="text-md caret-lime-800">
-        <Table/>
-      </div>
-    </main>
-  )
+	return (
+		<>
+			<title>Simple todo app</title>
+			<button>
+				<Link href='pages/table'>
+					Go to table
+				</Link>
+			</button>
+		</>
+	)
 }
