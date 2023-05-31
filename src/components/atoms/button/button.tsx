@@ -1,4 +1,6 @@
-export default function Button({ type, onClick }: { type: "delete" | "add" | "save" | "discard" | "edit", onClick?: () => void }) {
+import { ButtonProps } from "@/features/types/todos"
+
+export default function Button({ type, onClick, disabled }: ButtonProps ) {
 	const buttonText = {
 		add: "Add new",
 		delete: "Delete",

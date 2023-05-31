@@ -9,11 +9,52 @@ import Input from "@/components/atoms/input/input"
 import Title from "@/components/atoms/title/title"
 // #endregion components
 
-import { Todo } from "@/features/types/todos"
+import { Id, PostAndPutResponse, Todo } from "@/features/types/todos"
+
+import { deleteATodo, getTodos, postATodo, putATodo } from "@/utils/queryFunctions/todos";
+
+const TODOS_BASE_URL = new URL(process.env.NEXT_PUBLIC_BASE || "")
 
 export default function Table({ initialData }: { initialData: Todo[] }) {
 	const [tableRows, setTableRows] = useState<Todo[]>(initialData)
-	const [editingKey, setEditingKey] = useState<string | number | null>(null)
+	const [editingKey, setEditingKey] = useState<Id | null>(null)
+	const [isNewRow, setIsNewRow] = useState<boolean>(false)
+
+	const [taskText, setTaskText] = useState<string | undefined>()
+
+	const save = async (id: Id) => {
+		let postOrPutRes: PostAndPutResponse
+		if (isNewRow) {
+			postOrPutRes = await postATodo(TODOS_BASE_URL, { task: taskText || "" })
+		} else {
+			postOrPutRes = await putATodo(TODOS_BASE_URL, { id: id, task: taskText || "" })
+		}
+		if (postOrPutRes.isOk) {
+			const newTodos = await getTodos(TODOS_BASE_URL)
+			if (newTodos) {
+				setTableRows(newTodos)
+				setEditingKey(null)
+				setIsNewRow(false)
+			}
+		}
+	}
+
+	const deleteRow = async (id: Id) => {
+		const deleteOk = await deleteATodo(TODOS_BASE_URL, id)
+		if (deleteOk) {
+			const newTodos = await getTodos(TODOS_BASE_URL)
+			if (newTodos) {
+				setTableRows(newTodos)
+				setEditingKey(null)
+				setIsNewRow(false)
+			}
+		}
+	}
+
+	const edit = (row: Todo) => {
+		setEditingKey(row.id)
+		setTaskText(row.task)
+	}
 
 	return (
 		<table className="border-2 w-96">
@@ -27,10 +68,13 @@ export default function Table({ initialData }: { initialData: Todo[] }) {
 					editingKey === row.id ?
 						<tr className="border-2 border-indigo-400" key={row.id}>
 							<td className="border-4 border-pink-900">
-								<Input />
+								<Input
+									onChange={e => setTaskText(e.target.value)}
+									value={taskText}
+								/>
 							</td>
 							<td className="border-4 border-pink-800 bg-slate-300 w-32">
-								<Button type="save" /* onClick={() => console.log('clicked')} */ />
+								<Button type="save" onClick={() => save(row.id)} disabled={!taskText} />
 								<Button type="discard" onClick={() => setEditingKey(null)} />
 							</td>
 						</tr> :
@@ -39,8 +83,8 @@ export default function Table({ initialData }: { initialData: Todo[] }) {
 								<Cell text={row.task} />
 							</td>
 							<td className="border-4 border-pink-800 bg-slate-300 w-32" >
-								<Button type="delete" /* onClick={() => console.log('clicked')} */ />
-								<Button type="edit" onClick={() => setEditingKey(row.id)} />
+								<Button type="delete" onClick={() => deleteRow(row.id)} />
+								<Button type="edit" onClick={() => edit(row)} />
 							</td>
 						</tr>
 				)}
