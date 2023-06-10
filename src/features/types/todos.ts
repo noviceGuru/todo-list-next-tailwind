@@ -12,8 +12,10 @@ export type InputProps = {
 	placeholder?: string
 }
 
+export type ButtonTypes = "delete" | "add" | "save" | "discard" | "edit"
+
 export type ButtonProps = {
-	type: "delete" | "add" | "save" | "discard" | "edit"
+	type: ButtonTypes
 	onClick?: () => void
 	disabled?: boolean
 }

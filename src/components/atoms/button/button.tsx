@@ -13,7 +13,8 @@ export default function Button({ type, onClick, disabled }: ButtonProps ) {
 		<button
 			type="button"
 			onClick={onClick}
-			className="border-2 border-indigo-300 bg-indigo-300 rounded-md m-1"
+			className={`border-2 rounded-md m-1 ${type==='delete'?  `bg-red-600 border-red-300` : `border-indigo-300 bg-indigo-300`}`}
+			disabled={disabled}
 		>
 			{buttonText[type]}
 		</button>
