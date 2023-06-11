@@ -67,7 +67,7 @@ export default function Table({ initialData }: { initialData: Todo[] }) {
 				{tableRows.map(row =>
 					editingKey === row.id ?
 						<tr className="border-2 border-indigo-400" key={row.id}>
-							<td className="border-4 border-pink-900">
+							<td className="border-4 border-pink-900 pl-2">
 								<Input
 									onChange={e => setTaskText(e.target.value)}
 									value={taskText}
@@ -79,7 +79,7 @@ export default function Table({ initialData }: { initialData: Todo[] }) {
 							</td>
 						</tr> :
 						<tr className="border-2 border-indigo-400 " key={row.id}>
-							<td className="border-4 border-pink-900">
+							<td className="border-4 border-pink-900 pl-2">
 								<Cell text={row.task} />
 							</td>
 							<td className="border-4 border-pink-800 bg-slate-300 w-32" >
