@@ -14,12 +14,12 @@ const meta: Meta<typeof Button> = {
 
 export default meta
 
-type Story = StoryObj<typeof Button>
+type ButtonStory = StoryObj<typeof Button>
 
 /**
  * Button to add a new todo
  */
-export const Add: Story = {
+export const Add: ButtonStory = {
 	args: {
 		type: "add",
 		disabled: false
@@ -29,7 +29,7 @@ export const Add: Story = {
 /**
  * Button to edit a todo
  */
-export const Edit: Story = {
+export const Edit: ButtonStory = {
 	args: {
 		type: "edit",
 		disabled: false
@@ -39,7 +39,7 @@ export const Edit: Story = {
 /**
  * Button to save a todo
  */
-export const Save: Story = {
+export const Save: ButtonStory = {
 	args: {
 		type: "save",
 		disabled: false
@@ -49,7 +49,7 @@ export const Save: Story = {
 /**
  * Button to discard an eiditing todo
  */
-export const Discard: Story = {
+export const Discard: ButtonStory = {
 	args: {
 		type: "discard",
 		disabled: false
@@ -60,7 +60,7 @@ export const Discard: Story = {
  * Button to delete a todo
  */
 
-export const Delete: Story = {
+export const Delete: ButtonStory = {
 	args: {
 		type: "delete",
 		onClick: () => console.log('Amin')
