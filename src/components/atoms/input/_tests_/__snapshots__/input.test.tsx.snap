@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders Input with the correct text and looks 1`] = `
+<input
+  class="border-solid border-2 border-orange-500 rounded"
+  value="default dummy text for input"
+/>
+`;
