@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import useTable from "./useTable"
 
 // #region components
 import Button from "@/components/atoms/button/button";
@@ -9,72 +9,20 @@ import Input from "@/components/atoms/input/input"
 import Title from "@/components/atoms/title/title"
 // #endregion components
 
-import { Id, PostAndPutResponse, Todo } from "@/features/types/todos"
-
-import { deleteATodo, getTodos, postATodo, putATodo } from "@/utils/queryFunctions/todos";
-
-const TODOS_BASE_URL = new URL(process.env.NEXT_PUBLIC_BASE || "")
+import { Todo } from "@/features/types/todos"
 
 export default function Table({ initialData }: { initialData: Todo[] }) {
-	const [tableRows, setTableRows] = useState<Todo[]>(initialData)
-	const [editingKey, setEditingKey] = useState<Id | null>(null)
-	const [isNewRow, setIsNewRow] = useState<boolean>(false)
-
-	const [taskText, setTaskText] = useState<string | undefined>()
-
-	const save = async (id: Id) => {
-		let postOrPutRes: PostAndPutResponse
-		if (isNewRow) {
-			postOrPutRes = await postATodo(TODOS_BASE_URL, { task: taskText || "" })
-		} else {
-			postOrPutRes = await putATodo(TODOS_BASE_URL, { id: id, task: taskText || "" })
-		}
-		if (postOrPutRes.isOk) {
-			const newTodos = await getTodos(TODOS_BASE_URL)
-			if (newTodos) {
-				setTableRows(newTodos)
-				setEditingKey(null)
-				setIsNewRow(false)
-			}
-		}
-	}
-
-	const deleteRow = async (id: Id) => {
-		const deleteOk = await deleteATodo(TODOS_BASE_URL, id)
-		if (deleteOk) {
-			const newTodos = await getTodos(TODOS_BASE_URL)
-			if (newTodos) {
-				setTableRows(newTodos)
-				setEditingKey(null)
-				setIsNewRow(false)
-			}
-		}
-	}
-
-	const edit = (row: Todo) => {
-		setEditingKey(row.id)
-		setTaskText(row.task)
-	}
-
-	const discard = () => {
-		if(isNewRow){
-			setTableRows(rows => {
-				const newRows = structuredClone(rows)
-				newRows.pop()
-				return newRows
-			})
-		}
-
-		setEditingKey(null)
-	}
-	
-	const add = () => {
-		const newKey = `${new Date()}`
-		setTaskText("")
-		setTableRows(rows => [...rows, { id: newKey, task: "" }])
-		setEditingKey(newKey)
-		setIsNewRow(true)
-	}
+	const {
+		add,
+		edit,
+		save,
+		discard,
+		deleteRow,
+		tableRows,
+		editingKey,
+		taskText,
+		setTaskText
+	} = useTable(initialData)
 
 	return (
 		<table className="border-2 w-96">
