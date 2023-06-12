@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renderes title correctly with the correct looks 1`] = `
+<th>
+  dummy text title to test
+</th>
+`;
