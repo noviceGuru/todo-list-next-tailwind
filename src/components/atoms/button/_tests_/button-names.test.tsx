@@ -28,7 +28,7 @@ const buttonsTypesAndExpectedTexts: { type: ButtonTypes, text: string }[] = [
 ]
 
 buttonsTypesAndExpectedTexts.forEach(typeAndName => {
-	it('renders the add button with the correct name', () => {
+	it('renders the add button with the correct name and looks', () => {
 		render(
 			<Button
 				type={typeAndName.type}
@@ -36,5 +36,6 @@ buttonsTypesAndExpectedTexts.forEach(typeAndName => {
 		const button = screen.getByRole('button')
 
 		expect(button.textContent).toBe(typeAndName.text)
+		expect(button).toMatchSnapshot()
 	})
 })

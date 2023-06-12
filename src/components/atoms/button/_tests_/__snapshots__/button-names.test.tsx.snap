@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders the add button with the correct name 1`] = `
+<button
+  class="border-2 rounded-md m-1 border-indigo-300 bg-indigo-300"
+  type="button"
+>
+  Add new
+</button>
+`;
+
+exports[`renders the add button with the correct name 2`] = `
+<button
+  class="border-2 rounded-md m-1 bg-red-600 border-red-300"
+  type="button"
+>
+  Delete
+</button>
+`;
+
+exports[`renders the add button with the correct name 3`] = `
+<button
+  class="border-2 rounded-md m-1 border-indigo-300 bg-indigo-300"
+  type="button"
+>
+  Save
+</button>
+`;
+
+exports[`renders the add button with the correct name 4`] = `
+<button
+  class="border-2 rounded-md m-1 border-indigo-300 bg-indigo-300"
+  type="button"
+>
+  Discard
+</button>
+`;
+
+exports[`renders the add button with the correct name 5`] = `
+<button
+  class="border-2 rounded-md m-1 border-indigo-300 bg-indigo-300"
+  type="button"
+>
+  Edit
+</button>
+`;
