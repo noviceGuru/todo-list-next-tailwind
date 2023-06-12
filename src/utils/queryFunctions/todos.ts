@@ -37,6 +37,9 @@ export async function putATodo(url: URL, body: Todo) {
 export async function postATodo(url: URL, body: Omit<Todo, "id">) {
 	const res = await fetch(`${url}`, {
 		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
 		body: JSON.stringify(body)
 	})
 	if (!res.ok) {

@@ -56,11 +56,37 @@ export default function Table({ initialData }: { initialData: Todo[] }) {
 		setTaskText(row.task)
 	}
 
+	const discard = () => {
+		if(isNewRow){
+			setTableRows(rows => {
+				const newRows = structuredClone(rows)
+				newRows.pop()
+				return newRows
+			})
+		}
+
+		setEditingKey(null)
+	}
+	
+	const add = () => {
+		const newKey = `${new Date()}`
+		setTaskText("")
+		setTableRows(rows => [...rows, { id: newKey, task: "" }])
+		setEditingKey(newKey)
+		setIsNewRow(true)
+	}
+
 	return (
 		<table className="border-2 w-96">
 			<thead>
-				<tr className="border-2 border-black rounded-md">
+				<tr className="border-2 border-black rounded">
 					<Title title="a todo table" />
+					<td className="border-l-2 border-black flex justify-center">
+						<Button
+							type="add"
+							onClick={add}
+						/>
+					</td>
 				</tr>
 			</thead>
 			<tbody>
@@ -75,7 +101,7 @@ export default function Table({ initialData }: { initialData: Todo[] }) {
 							</td>
 							<td className="border-4 border-pink-800 bg-slate-300 w-32">
 								<Button type="save" onClick={() => save(row.id)} disabled={!taskText} />
-								<Button type="discard" onClick={() => setEditingKey(null)} />
+								<Button type="discard" onClick={discard} />
 							</td>
 						</tr> :
 						<tr className="border-2 border-indigo-400 " key={row.id}>
