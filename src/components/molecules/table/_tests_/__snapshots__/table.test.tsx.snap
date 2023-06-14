@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the table renders row correctly with the data and correct looks 1`] = `
+<table
+  class="border-2 w-96"
+>
+  <thead>
+    <tr
+      class="border-2 border-black rounded"
+    >
+      <th>
+        a todo table
+      </th>
+      <td
+        class="border-l-2 border-black flex justify-center"
+      >
+        <button
+          class="border-2 rounded-md m-1 border-indigo-300 bg-indigo-300"
+          type="button"
+        >
+          Add new
+        </button>
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      class="border-2 border-indigo-400 "
+    >
+      <td
+        class="border-4 border-pink-900 pl-2"
+      >
+        <span>
+          write tests
+        </span>
+      </td>
+      <td
+        class="border-4 border-pink-800 bg-slate-300 w-32"
+      >
+        <button
+          class="border-2 rounded-md m-1 bg-red-600 border-red-300"
+          type="button"
+        >
+          Delete
+        </button>
+        <button
+          class="border-2 rounded-md m-1 border-indigo-300 bg-indigo-300"
+          type="button"
+        >
+          Edit
+        </button>
+      </td>
+    </tr>
+    <tr
+      class="border-2 border-indigo-400 "
+    >
+      <td
+        class="border-4 border-pink-900 pl-2"
+      >
+        <span>
+          make the storybook
+        </span>
+      </td>
+      <td
+        class="border-4 border-pink-800 bg-slate-300 w-32"
+      >
+        <button
+          class="border-2 rounded-md m-1 bg-red-600 border-red-300"
+          type="button"
+        >
+          Delete
+        </button>
+        <button
+          class="border-2 rounded-md m-1 border-indigo-300 bg-indigo-300"
+          type="button"
+        >
+          Edit
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;
