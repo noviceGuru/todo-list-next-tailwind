@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders the add button with the correct name 1`] = `
+exports[`renders the add button with the correct name and looks 1`] = `
 <button
   class="border-2 rounded-md m-1 border-indigo-300 bg-indigo-300"
   type="button"
@@ -9,7 +9,7 @@ exports[`renders the add button with the correct name 1`] = `
 </button>
 `;
 
-exports[`renders the add button with the correct name 2`] = `
+exports[`renders the add button with the correct name and looks 2`] = `
 <button
   class="border-2 rounded-md m-1 bg-red-600 border-red-300"
   type="button"
@@ -18,7 +18,7 @@ exports[`renders the add button with the correct name 2`] = `
 </button>
 `;
 
-exports[`renders the add button with the correct name 3`] = `
+exports[`renders the add button with the correct name and looks 3`] = `
 <button
   class="border-2 rounded-md m-1 border-indigo-300 bg-indigo-300"
   type="button"
@@ -27,7 +27,7 @@ exports[`renders the add button with the correct name 3`] = `
 </button>
 `;
 
-exports[`renders the add button with the correct name 4`] = `
+exports[`renders the add button with the correct name and looks 4`] = `
 <button
   class="border-2 rounded-md m-1 border-indigo-300 bg-indigo-300"
   type="button"
@@ -36,7 +36,7 @@ exports[`renders the add button with the correct name 4`] = `
 </button>
 `;
 
-exports[`renders the add button with the correct name 5`] = `
+exports[`renders the add button with the correct name and looks 5`] = `
 <button
   class="border-2 rounded-md m-1 border-indigo-300 bg-indigo-300"
   type="button"
