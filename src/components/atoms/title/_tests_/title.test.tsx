@@ -12,6 +12,6 @@ it('renderes title correctly with the correct looks', () => {
 		, { container: document.body.appendChild(tableRow) })
 	
 	const title = screen.getByRole('columnheader')
-	expect(title).toBe('dummy text title to test')
+	expect(title.textContent).toBe('dummy text title to test')
 	expect(title).toMatchSnapshot()
 })
