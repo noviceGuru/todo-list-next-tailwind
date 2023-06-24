@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`link-button renders correctly, reproduces correct link and text 1`] = `
+<a
+  href="pages/a-dummy-url"
+>
+  link button dummy text
+</a>
+`;
