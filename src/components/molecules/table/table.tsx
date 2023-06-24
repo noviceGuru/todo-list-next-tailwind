@@ -3,10 +3,10 @@
 import useTable from "./useTable"
 
 // #region components
-import Button from "@/components/atoms/button/button";
-import Cell from "@/components/atoms/cell/cell";
-import Input from "@/components/atoms/input/input"
-import Title from "@/components/atoms/title/title"
+import Button from "@/components/atoms/button"
+import Cell from "@/components/atoms/cell"
+import Input from "@/components/atoms/input"
+import Title from "@/components/atoms/title"
 // #endregion components
 
 import { Todo } from "@/features/types/todos"

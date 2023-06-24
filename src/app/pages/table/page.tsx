@@ -1,4 +1,4 @@
-import Table from "@/components/molecules/table/table"
+import Table from "@/components/molecules/table"
 import { getTodos } from "@/utils/queryFunctions/todos"
 
 export default async function TablePage(props: any) {
