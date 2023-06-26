@@ -1,7 +1,7 @@
 import Table from "@/components/molecules/table"
 import { getTodos } from "@/utils/queryFunctions/todos"
 
-export default async function TablePage(props: any) {
+export default async function TablePage() {
   const data = await getTodos(new URL(process.env.NEXT_PUBLIC_BASE || ""))
 
   return (<>

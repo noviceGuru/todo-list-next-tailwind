@@ -1,4 +1,5 @@
 import { Id, Todo } from "@/features/types/todos"
+import fetch from "node-fetch"
 
 export async function getTodos(url: URL) {
 	const res = await fetch(url)
