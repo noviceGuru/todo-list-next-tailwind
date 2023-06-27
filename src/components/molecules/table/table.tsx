@@ -38,7 +38,13 @@ export default function Table({ initialData }: { initialData: Todo[] }) {
 				</tr>
 			</thead>
 			<tbody>
-				{tableRows.map(row =>
+				{ initialData.length<1 ?
+				<tr>
+					<td>
+						No data provided
+					</td>
+				</tr>	:
+				tableRows.map(row =>
 					editingKey === row.id ?
 						<tr className="border-2 border-indigo-400" key={row.id}>
 							<td className="border-4 border-pink-900 pl-2">

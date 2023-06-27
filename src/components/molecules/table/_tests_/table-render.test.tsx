@@ -40,7 +40,7 @@ it('renders initial buttons (delete and edit) correctly', () => {
 	expect(button_delete1).toBeInTheDocument()
 	expect(button_edit1).toBeInTheDocument()
 
-	
+
 	const row2 = within(table).getByRole('row', {
 		name: 'write tests Delete Edit'
 	})
@@ -55,5 +55,20 @@ it('renders initial buttons (delete and edit) correctly', () => {
 
 	expect(button_delete2).toBeInTheDocument()
 	expect(button_edit2).toBeInTheDocument()
+	cleanup()
+})
+
+test('If empty array arrived, show only empty note', () => {
+	render(<Table
+		initialData={[]}
+	/>)
+
+	const table = screen.getByRole('table')
+	const emptyNote = within(table).getByRole('cell', {
+		name: /no data provided/i
+	  })
+	
+	expect(emptyNote).toBeInTheDocument()
+	
 	cleanup()
 })
