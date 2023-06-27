@@ -2,15 +2,29 @@ import { Id, Todo } from "@/features/types/todos"
 import fetch from "node-fetch"
 
 export async function getTodos(url: URL) {
-	const res = await fetch(url)
-	if (!res.ok) {
-		throw new Error('Failed to fetch todos')
+	let response : {
+		data : Todo[] | undefined
+		error : Error | undefined
+	} = {
+		data : undefined,
+		error : undefined
 	}
-	const todos = (await res.json()) as Todo[]
-	return todos
+
+	try {
+		const res = await fetch(url)
+		if (!res.ok) {
+			throw new Error('Failed to fetch todos')
+		}
+		const todos = (await res.json()) as Todo[]
+		response.data = todos
+	} catch (err) {
+		response.error = err as Error
+	}
+
+	return response
 }
 
-export async function deleteATodo(url: URL, id: string | number) {
+export async function deleteATodo(url: URL, id: Id) {
 	const res = await fetch(`${url}/${id}`, {
 		method: "DELETE"
 	})

@@ -2,7 +2,7 @@ import { render, screen, within } from "@testing-library/react"
 import '@testing-library/jest-dom'
 
 import { mswServer } from "@/utils/testApis/server"
-import { initalTodos, initial_fetchTodos_success } from "@/utils/testApis/testApiHandlers"
+import { fetchTodos_fail, initalTodos, initial_fetchTodos_success } from "@/utils/testApis/testApiHandlers"
 import TablePage from "../page"
 
 beforeEach(() => mswServer.listen())
@@ -31,4 +31,20 @@ test('after successful fetch, renders the table correctly', async () => {
 	expect(pageTable).toBeInTheDocument()
 	expect(cell1TextSpan.innerHTML).toBe(initalTodos[0].task)
 	expect(cell2TextSpan.innerHTML).toBe(initalTodos[1].task)
+})
+
+test('after failed fetch, doesn\'t render empty table and renders the error element', async () => {
+	mswServer.use(fetchTodos_fail)
+
+	render(
+		await (async () => await TablePage())()
+	)
+
+	const pageTable = screen.queryByRole('table')
+	const failedNote = screen.getByRole('heading', {
+		name: /failed to get the data/i
+	  })
+
+	expect(pageTable).not.toBeInTheDocument()
+	expect(failedNote).toBeInTheDocument()
 })
