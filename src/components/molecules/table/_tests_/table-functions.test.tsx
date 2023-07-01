@@ -2,20 +2,12 @@ import { fireEvent, render, screen, within } from "@testing-library/react"
 import '@testing-library/jest-dom'
 import Table from "../table"
 
-export const initialData = [
-	{
-		"id": 1,
-		"task": "write tests"
-	},
-	{
-		"id": 2,
-		"task": "make the storybook"
-	}
-]
+import { testTodos } from '@/utils/testApis/testApiHandlers'
+
 
 test('by clicking edit, cell becomes an input, save and discard buttons appear in the row, and delete and edit buttons disappear', () => {
 	render(<Table
-		initialData={initialData}
+		initialData={testTodos.initalTodos}
 	/>)
 
 	const table = screen.getByRole('table')
@@ -60,7 +52,7 @@ test('by clicking edit, cell becomes an input, save and discard buttons appear i
 
 test('by clicking edit, the other row does not change', () => {
 	render(<Table
-		initialData={initialData}
+		initialData={testTodos.initalTodos}
 	/>)
 
 	const table = screen.getByRole('table')

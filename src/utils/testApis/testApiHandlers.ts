@@ -1,27 +1,91 @@
 import { rest } from 'msw'
+import { Todo } from '@/features/types/todos'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE || ""
 
-export const initalTodos = [
-	{
-		"id": 1,
-		"task": "write tests"
-	},
-	{
-		"id": 2,
-		"task": "make the storybook"
-	}
-]
+export const testTodos = {
+	initalTodos: [
+		{
+			"id": 1,
+			"task": "write tests"
+		},
+		{
+			"id": 2,
+			"task": "make the storybook"
+		}
+	],
 
-export const initial_fetchTodos_success = rest.get(BASE_URL, async (req, res, ctx) =>
-	res(
-		ctx.status(200),
-		ctx.json(initalTodos)
+	todosAfterDeleteTodo1: [
+		{
+			"id": 2,
+			"task": "make the storybook"
+		}
+	],
+
+	todosAfterModifiedRow1: [
+		{
+			"id": 1,
+			"task": "write tests modified"
+		},
+		{
+			"id": 2,
+			"task": "make the storybook"
+		}
+	],
+
+	todosAfterOneRowAdded: [
+		{
+			"id": 1,
+			"task": "write tests"
+		},
+		{
+			"id": 2,
+			"task": "make the storybook"
+		},
+		{
+			"id": 3,
+			"task": "the third row added"
+		}
+	]
+}
+
+const generateSuccessResponse = (todos: Todo[]) =>
+	rest.get(BASE_URL, async (req, res, ctx) =>
+		res(
+			ctx.status(200),
+			ctx.json(todos)
+		)
 	)
+
+const generateFailureGetResponse = () =>
+	rest.get(BASE_URL, async (req, res, ctx) =>
+		res(ctx.status(400))
+	)
+
+const success = Object.fromEntries(
+	Object.entries(testTodos)
+		.map(e => [`${e[0]}`, generateSuccessResponse(e[1])])
 )
 
-export const fetchTodos_fail = rest.get(BASE_URL, async (req, res, ctx) =>
-	res(ctx.status(400, 'failed to fetch'))
+export const getFails = Object.fromEntries(
+	Object.entries(testTodos)
+		.map(e => [`fail_${e[0]}`, generateFailureGetResponse()])
 )
 
-export const handlers = [initial_fetchTodos_success, fetchTodos_fail]
+export const otherFails = {
+	deleteFirstRowFail: rest.delete(BASE_URL + '/1', async (req, res, ctx) =>
+		res(ctx.status(400))
+	),
+	putFirstRowFail: rest.put(BASE_URL + '/1', async (req, res, ctx) =>
+		res(ctx.status(400))
+	),
+	addARowFail: rest.post(BASE_URL, async (req, res, ctx) =>
+		res(ctx.status(400))
+	)
+}
+
+export const mockApiCallHandlers = { ...success, ...getFails, ...otherFails }
+
+const handlers = Object.entries(mockApiCallHandlers).map(e => e[1])
+
+export default handlers
