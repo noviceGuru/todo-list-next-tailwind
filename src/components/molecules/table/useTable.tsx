@@ -23,7 +23,7 @@ export default function useTable(initialData: Todo[]) {
 		if (postOrPutRes.isOk) {
 			const newTodos = await getTodos(TODOS_BASE_URL)
 			if (newTodos) {
-				setTableRows(newTodos)
+				setTableRows(newTodos.data || [])
 				setEditingKey(null)
 				setIsNewRow(false)
 			}
@@ -35,7 +35,7 @@ export default function useTable(initialData: Todo[]) {
 		if (deleteOk) {
 			const newTodos = await getTodos(TODOS_BASE_URL)
 			if (newTodos) {
-				setTableRows(newTodos)
+				setTableRows(newTodos.data || [])
 				setEditingKey(null)
 				setIsNewRow(false)
 			}
