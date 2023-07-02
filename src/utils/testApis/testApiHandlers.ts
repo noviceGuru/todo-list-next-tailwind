@@ -62,7 +62,7 @@ const generateFailureGetResponse = () =>
 		res(ctx.status(400))
 	)
 
-const success = Object.fromEntries(
+const getSuccesses = Object.fromEntries(
 	Object.entries(testTodos)
 		.map(e => [`${e[0]}`, generateSuccessResponse(e[1])])
 )
@@ -72,6 +72,17 @@ export const getFails = Object.fromEntries(
 		.map(e => [`fail_${e[0]}`, generateFailureGetResponse()])
 )
 
+export const otherSuccesses = {
+	deleteFirstRow: rest.delete(BASE_URL + '/1', async (req, res, ctx) =>
+		res(ctx.status(200))
+	),
+	putFirstRow: rest.put(BASE_URL + '/1', async (req, res, ctx) =>
+		res(ctx.status(200))
+	),
+	addARow: rest.post(BASE_URL, async (req, res, ctx) =>
+		res(ctx.status(200))
+	)
+}
 export const otherFails = {
 	deleteFirstRowFail: rest.delete(BASE_URL + '/1', async (req, res, ctx) =>
 		res(ctx.status(400))
@@ -84,7 +95,7 @@ export const otherFails = {
 	)
 }
 
-export const mockApiCallHandlers = { ...success, ...getFails, ...otherFails }
+export const mockApiCallHandlers = { ...getSuccesses, ...getFails, ...otherSuccesses, ...otherFails }
 
 const handlers = Object.entries(mockApiCallHandlers).map(e => e[1])
 
