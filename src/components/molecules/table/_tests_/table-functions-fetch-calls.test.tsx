@@ -82,7 +82,59 @@ test('edits a row correctly', () => {
 	})
 
 	//edits successfully
-	waitFor(()=> expect(cell1).toBeInTheDocument())
+	waitFor(() => expect(cell1).toBeInTheDocument())
 })
 
-// test('adds a row correctly')
+test('adds a row correctly', () => {
+	mswServer.use(mockApiCallHandlers.addARow)
+
+	//@ts-expect-error: TypeScript doesn't consider typing of calculated objects
+	mswServer.use(mockApiCallHandlers.todosAfterOneRowAdded)
+
+	render(<Table
+		initialData={testTodos.initalTodos}
+	/>)
+
+	const table = screen.getByRole("table")
+	const addNewButton = within(table).getByRole('button', { name: /add new/i })
+	fireEvent.click(addNewButton)
+
+	const addedRow = within(table).getByRole('row', {
+		name: /save discard/i
+	})
+
+	// New row is rendered
+	expect(addedRow).toBeInTheDocument()
+
+	const addedInput = within(addedRow).getByRole('textbox')
+	fireEvent.change(addedInput, { target: { value: testTodos.todosAfterOneRowAdded[2].task } })
+
+	// Input works
+	expect(addedInput).toHaveValue(testTodos.todosAfterOneRowAdded[2].task)
+
+	const added_discard_button = within(addedRow).getByRole('button', {
+		name: /save/i
+	})
+	const added_save_button = within(addedRow).getByRole('button', {
+		name: /save/i
+	})
+	fireEvent.click(added_save_button)
+
+	const addedCell = within(addedRow).getByRole('cell', {
+		name: new RegExp(testTodos.todosAfterOneRowAdded[2].task, 'i')
+	})
+	const added_delete_button = within(addedRow).queryByRole('button', {
+		name: /delete/i
+	})
+	const added_edit_button = within(addedRow).queryByRole('button', {
+		name: /edit/i
+	})
+
+	waitFor(() => {
+		expect(addedCell).toHaveTextContent(testTodos.todosAfterOneRowAdded[2].task)
+		expect(added_save_button).not.toBeInTheDocument()
+		expect(added_discard_button).not.toBeInTheDocument()
+		expect(added_delete_button).toBeInTheDocument()
+		expect(added_edit_button).toBeInTheDocument()
+	})
+})

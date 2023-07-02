@@ -80,7 +80,7 @@ export const otherSuccesses = {
 		res(ctx.status(200), ctx.json({}))
 	),
 	addARow: rest.post(BASE_URL, async (req, res, ctx) =>
-		res(ctx.status(200))
+		res(ctx.status(200), ctx.json({}))
 	)
 }
 export const otherFails = {
