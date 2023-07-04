@@ -39,6 +39,45 @@ test('Adds a task successfully', async ({ page }) => {
 	await expect(cell).toBeVisible()
 })
 
+test('Edits a task successfully', async ({ page }) => {
+	await page.goto('http://localhost:3000/pages/table')
+
+	await page.route('http://localhost:3001/todos', route => {
+		if (route.request().method() === 'GET') {
+			return route.fulfill({
+				body: JSON.stringify(testTodos.todosAfterModifiedRow1)
+			})
+		}
+	})
+
+	await page.route('http://localhost:3001/todos/*', route => {
+		if (route.request().method() === 'PUT') {
+			return route.fulfill({
+				body: JSON.stringify(testTodos.todosAfterModifiedRow1)
+			})
+		}
+	})
+
+	const edit = await page.getByRole('table')
+		.getByRole('row', { name: 'write tests' })
+		.getByRole('button', { name: /edit/i })
+
+
+	await edit.click()
+
+	const save = await page.getByRole('button', {name: /save/i})
+	const input = page.getByRole('textbox')
+	await input.fill(testTodos.todosAfterModifiedRow1[0].task)
+
+
+	await save.click()
+	const cell = await page.getByRole('table')
+		.getByRole('row', { name: new RegExp(testTodos.todosAfterModifiedRow1[0].task, 'i') })
+		.getByRole('cell', { name: testTodos.todosAfterModifiedRow1[0].task })
+
+	await expect(cell).toHaveText(testTodos.todosAfterModifiedRow1[0].task)
+})
+
 test('Deletes a task successfully', async ({ page }) => {
 	await page.goto('http://localhost:3000/pages/table')
 
@@ -52,9 +91,7 @@ test('Deletes a task successfully', async ({ page }) => {
 	
 	await page.route('http://localhost:3001/todos/*', route => {
 		if (route.request().method() === 'DELETE') {
-			return route.fulfill({
-				body: JSON.stringify(testTodos.todosAfterDeleteTodo1)
-			})
+			return route.fulfill()
 		}
 	})
 
