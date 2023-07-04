@@ -12,9 +12,9 @@
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
-    "test:e2e" : "npx playwright test",
-    "test:e2e-debug" : "npx playwright test --debug",
-    "test:e2e-report" : "npx playwright show-report"
+    "test:e2e": "npx playwright test",
+    "test:e2e-debug": "npx playwright test --debug",
+    "test:e2e-report": "npx playwright show-report"
   },
   "dependencies": {
     "@tanstack/react-query": "^4.29.11",
