@@ -17,7 +17,6 @@
     "test:e2e-report": "npx playwright show-report"
   },
   "dependencies": {
-    "@tanstack/react-query": "^4.29.11",
     "@types/node": "20.2.4",
     "@types/react": "18.2.7",
     "@types/react-dom": "18.2.4",
@@ -41,7 +40,6 @@
     "@storybook/react": "^7.0.18",
     "@storybook/testing-library": "^0.0.14-next.2",
     "@tanstack/eslint-plugin-query": "^4.29.9",
-    "@tanstack/react-query-devtools": "^4.29.11",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "eslint-plugin-storybook": "^0.6.12",
