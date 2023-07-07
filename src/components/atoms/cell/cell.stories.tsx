@@ -4,7 +4,7 @@ import Cell from "./cell"
 const meta: Meta<typeof Cell> = {
 	title: 'Atoms/Cell',
 	component: Cell,
-	tags: ['button', 'autodocs'],
+	tags: ['cell', 'autodocs'],
 	argTypes: {
 		text: {
 			text: "string",
