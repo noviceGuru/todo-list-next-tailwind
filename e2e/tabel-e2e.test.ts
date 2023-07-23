@@ -1,10 +1,13 @@
 import { test, expect } from '@playwright/test'
 import { testTodos } from '../src/utils/testApis/testApiHandlers'
 
-test('Adds a task successfully', async ({ page }) => {
-	await page.goto('http://localhost:3000/pages/table')
+const BASE_ROOT_URL = process.env.NEXT_PUBLIC_ROOT_URL as string
+const BASE_FETCH_URL = process.env.NEXT_PUBLIC_BASE as string
 
-	await page.route('http://localhost:3001/todos', route => {
+test('Adds a task successfully', async ({ page }) => {
+	await page.goto(`${BASE_ROOT_URL}pages/table`)
+
+	await page.route(BASE_FETCH_URL, route => {
 		if (route.request().method() === 'GET') {
 			return route.fulfill({
 				body: JSON.stringify(testTodos.todosAfterOneRowAdded)
@@ -40,7 +43,7 @@ test('Adds a task successfully', async ({ page }) => {
 })
 
 test('Edits a task successfully', async ({ page }) => {
-	await page.goto('http://localhost:3000/pages/table')
+	await page.goto(`${BASE_ROOT_URL}/pages/table`)
 
 	await page.route('http://localhost:3001/todos', route => {
 		if (route.request().method() === 'GET') {
@@ -50,7 +53,7 @@ test('Edits a task successfully', async ({ page }) => {
 		}
 	})
 
-	await page.route('http://localhost:3001/todos/*', route => {
+	await page.route(`${BASE_FETCH_URL}/*`, route => {
 		if (route.request().method() === 'PUT') {
 			return route.fulfill({
 				body: JSON.stringify(testTodos.todosAfterModifiedRow1)
@@ -79,9 +82,9 @@ test('Edits a task successfully', async ({ page }) => {
 })
 
 test('Deletes a task successfully', async ({ page }) => {
-	await page.goto('http://localhost:3000/pages/table')
+	await page.goto(`${BASE_ROOT_URL}pages/table`)
 
-	await page.route('http://localhost:3001/todos', route => {
+	await page.route(BASE_FETCH_URL, route => {
 		if (route.request().method() === 'GET') {
 			return route.fulfill({
 				body: JSON.stringify(testTodos.todosAfterDeleteTodo1)
@@ -89,7 +92,7 @@ test('Deletes a task successfully', async ({ page }) => {
 		}
 	})
 	
-	await page.route('http://localhost:3001/todos/*', route => {
+	await page.route(`${BASE_FETCH_URL}/*`, route => {
 		if (route.request().method() === 'DELETE') {
 			return route.fulfill()
 		}
