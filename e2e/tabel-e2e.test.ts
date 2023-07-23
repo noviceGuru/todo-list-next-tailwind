@@ -45,7 +45,7 @@ test('Adds a task successfully', async ({ page }) => {
 test('Edits a task successfully', async ({ page }) => {
 	await page.goto(`${BASE_ROOT_URL}/pages/table`)
 
-	await page.route('http://localhost:3001/todos', route => {
+	await page.route(BASE_FETCH_URL, route => {
 		if (route.request().method() === 'GET') {
 			return route.fulfill({
 				body: JSON.stringify(testTodos.todosAfterModifiedRow1)
