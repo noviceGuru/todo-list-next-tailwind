@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor, within } from "@testing-library/react"
+import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react"
 import '@testing-library/jest-dom'
 
 import Table from "../table"
@@ -21,7 +21,7 @@ test("Table is rendered with presumedly fetched data", () => {
 	expect(table).toBeInTheDocument()
 })
 
-test('deletes a row correctly', async () => {
+test('deletes a row correctly', () => {
 	mswServer.use(mockApiCallHandlers.deleteFirstRow)
 
 	//@ts-expect-error: TypeScript doesn't consider typing of calculated objects
@@ -39,15 +39,14 @@ test('deletes a row correctly', async () => {
 		name: /delete/i
 	})
 
-	fireEvent.click(delete_button1)
-
+	act(()=>fireEvent.click(delete_button1))
 	const newRow1 = within(table).queryByRole('row', {
 		name: new RegExp(`${testTodos.initalTodos[0].task} delete edit`, "i")
 	})
-	await waitFor(() => expect(newRow1).not.toBeInTheDocument())
+	waitFor(() => expect(newRow1).not.toBeInTheDocument())
 })
 
-test('edits a row correctly', () => {
+test('edits a row correctly', async () => {
 	mswServer.use(mockApiCallHandlers.putFirstRow)
 
 	//@ts-expect-error: TypeScript doesn't consider typing of calculated objects
@@ -77,7 +76,7 @@ test('edits a row correctly', () => {
 		name : /save/i
 	})
 	fireEvent.click(save_button1)
-	const cell1 = within(row1).queryByRole('cell', {
+	const cell1 = within(row1).findByRole('cell', {
 		name: new RegExp(testTodos.todosAfterModifiedRow1[0].task)
 	})
 

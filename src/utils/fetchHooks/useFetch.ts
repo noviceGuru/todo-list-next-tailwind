@@ -9,24 +9,29 @@ export type UseFetchReturnType = [
 	{
 		data: Todo[] | undefined,
 		isLoading: boolean | undefined,
-		error: Error | undefined
+		error: Error | undefined,
+		isSuccessful: boolean | null,
+		resetChache: () => void
 	}
 ]
 
-export const useFetch = (type: "GET_ALL" | "GET_ONE" | "DELETE" | "POST" | "PUT"): UseFetchReturnType => {
+export type methodType = "GET_ALL" | "GET_ONE" | "DELETE" | "POST" | "PUT"
+
+export const useFetch = (type: methodType): UseFetchReturnType => {
 	const [data, setData] = useState<Todo[]>()
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 	const [error, setError] = useState<Error>()
+	const [isSuccessful, setIsSuccessful] = useState<boolean | null>(null)
 
 	const fetchFunction = (idOrBody?: Id | Todo) => {
 		if ("GET_ALL" && !idOrBody) {
 			return getAll()
-		} else if ("GET_ONE" && idOrBody) {
-			getOne(idOrBody as Id)
+		} else if (type === "GET_ONE" && idOrBody) {
+			return getOne(idOrBody as Id)
 		} else if (type === "DELETE" && idOrBody) {
-			deleteOne(idOrBody as Id)
+			return deleteOne(idOrBody as Id)
 		} else if (type === "POST" && idOrBody) {
-			postOne(idOrBody as Todo)
+			return postOne(idOrBody as Todo)
 		} else if (type === "PUT" && idOrBody) {
 			return putOne(idOrBody as Todo)
 		}
@@ -35,15 +40,26 @@ export const useFetch = (type: "GET_ALL" | "GET_ONE" | "DELETE" | "POST" | "PUT"
 	const callFetch = async (bodyOrId?: Id | Todo) => {
 		try {
 			const response = await fetchFunction(bodyOrId)
+			if (response!.ok) {
+				setIsSuccessful(true)
+			}
 			setIsLoading(true)
 			setError(undefined)
 			const responseData = await response!.json()
 			setData(responseData)
 		} catch (error) {
 			setError(error as Error)
+			setIsSuccessful(false)
 		} finally {
 			setIsLoading(false)
 		}
+	}
+
+	const resetChache = () => {
+		setData(undefined)
+		setIsLoading(false)
+		setError(undefined)
+		setIsSuccessful(null)
 	}
 
 	return [
@@ -51,7 +67,9 @@ export const useFetch = (type: "GET_ALL" | "GET_ONE" | "DELETE" | "POST" | "PUT"
 		{
 			data: data,
 			isLoading: isLoading,
-			error: error
+			error: error,
+			isSuccessful: isSuccessful,
+			resetChache: resetChache
 		}
 	]
 }
