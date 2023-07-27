@@ -1,4 +1,4 @@
-import { Id, Todo } from "@/features/types/todos"
+import { Id, Task, Todo } from "@/features/types/todos"
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE as string
 
@@ -16,8 +16,8 @@ export const putOne = (body: Todo) => fetch(`${BASE_URL}/${body.id}`, {
 	}
 })
 
-export const postOne = (body: Todo) => fetch(BASE_URL, {
-	method: "PUT",
+export const postOne = (body: Task) => fetch(BASE_URL, {
+	method: "POST",
 	body: JSON.stringify(body),
 	headers: {
 		"Content-Type": "application/json",

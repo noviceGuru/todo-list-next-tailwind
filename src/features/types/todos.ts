@@ -5,6 +5,10 @@ export type Todo = {
 
 export type Id = number | string
 
+export type Task = {
+	task: string
+}
+
 export type InputProps = {
 	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 	value?: string
@@ -21,6 +25,6 @@ export type ButtonProps = {
 }
 
 export type PostAndPutResponse = {
-	response : Todo
+	response: Todo
 	isOk: boolean
 }

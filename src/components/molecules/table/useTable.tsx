@@ -1,11 +1,8 @@
 import { useEffect, useState } from 'react'
 
-import { Id, PostAndPutResponse, Todo } from "@/features/types/todos"
+import { Id, Todo } from "@/features/types/todos"
 
-import { deleteATodo, getTodos, postATodo, putATodo } from "@/utils/queryFunctions/todos"
 import { useFetch } from '@/utils/fetchHooks/useFetch'
-
-const TODOS_BASE_URL = new URL(process.env.NEXT_PUBLIC_BASE || "")
 
 export default function useTable(initialData: Todo[]) {
 	const [tableRows, setTableRows] = useState<Todo[]>(initialData)
@@ -16,13 +13,20 @@ export default function useTable(initialData: Todo[]) {
 	const [taskText, setTaskText] = useState<string | undefined>()
 
 	const [getAll, { data: getAllData, isLoading: getAllIsLoading, error: getAllError }] = useFetch('GET_ALL')
-	const [postOne, { data: postOneData, isLoading: postOneIsLoading, error: postOneIsError }] = useFetch('POST')
-	const [putOne, { data: putOneData, isLoading: putOneIsLoading, error: putOneError }] = useFetch('PUT')
-	const [deleteOne, { isSuccessful: deleteOneIsSuccessful, isLoading: deleteOneIsLoading, error: deleteOneError }] = useFetch('DELETE')
+	const [postOne, { data: postOneData, isLoading: postOneIsLoading, error: postOneIsError, resetChache: postOneResetCache }] = useFetch('POST')
+	const [putOne, { data: putOneData, isLoading: putOneIsLoading, error: putOneError, resetChache: putOneResetCache }] = useFetch('PUT')
+	const [deleteOne, { isSuccessful: deleteOneIsSuccessful, isLoading: deleteOneIsLoading, error: deleteOneError, resetChache: deletOneResetCache }] = useFetch('DELETE')
 
 	useEffect(() => {
 		if (postOneData || putOneData || deleteOneIsSuccessful) {
-			getAll()
+			getAll({})
+
+			postOneResetCache()
+			putOneResetCache()
+			deletOneResetCache()
+
+			setIsNewRow(false)
+			setEditingKey(null)
 		}
 	}, [postOneData, putOneData, deleteOneIsSuccessful])
 
@@ -33,39 +37,20 @@ export default function useTable(initialData: Todo[]) {
 	}, [getAllData])
 
 	useEffect(() => {
-		if(postOneIsError || putOneError || deleteOneError || getAllError) {
+		if (postOneIsError || putOneError || deleteOneError || getAllError) {
 			setError(postOneIsError || putOneError || deleteOneError || getAllError)
 		}
 	}, [postOneIsError, putOneError, deleteOneError, getAllError])
 
 	const save = async (id: Id) => {
-		let postOrPutRes: PostAndPutResponse
-		if (isNewRow) {
-			postOrPutRes = await postATodo(TODOS_BASE_URL, { task: taskText || "" })
-		} else {
-			postOrPutRes = await putATodo(TODOS_BASE_URL, { id: id, task: taskText || "" })
-		}
-		if (postOrPutRes.isOk) {
-			const newTodos = await getTodos(TODOS_BASE_URL)
-			if (newTodos) {
-				setTableRows(newTodos.data || [])
-				setEditingKey(null)
-				setIsNewRow(false)
-			}
-		}
+		isNewRow ?
+			await postOne({ task: { task: taskText || "" } })
+			:
+			await putOne({ todo: { id: id, task: taskText || "" } })
 	}
 
 	const deleteRow = async (id: Id) => {
-		await deleteOne(id)
-		// const deleteOk = await deleteATodo(TODOS_BASE_URL, id)
-		// if (deleteOk) {
-		// 	const newTodos = await getTodos(TODOS_BASE_URL)
-		// 	if (newTodos) {
-		// 		setTableRows(newTodos.data || [])
-		// 		setEditingKey(null)
-		// 		setIsNewRow(false)
-		// 	}
-		// }
+		await deleteOne({ id: id })
 	}
 
 	const edit = (row: Todo) => {

@@ -1,11 +1,13 @@
 import { useState } from "react"
 
-import { Id, Todo } from "@/features/types/todos"
+import { Id, Task, Todo } from "@/features/types/todos"
 
 import { getAll, getOne, deleteOne, postOne, putOne } from "../queryFunctions/queryFuncs"
 
+export type BodyOrIdOrTaskType = { id: Id, todo: Todo, task: Task }
+
 export type UseFetchReturnType = [
-	(bodyOrId?: Todo | Id) => Promise<void>,
+	(bodyOrIdOrTask: Partial<{ id: Id; todo: Todo; task: Task; }>) => Promise<void>,
 	{
 		data: Todo[] | undefined,
 		isLoading: boolean | undefined,
@@ -23,23 +25,22 @@ export const useFetch = (type: methodType): UseFetchReturnType => {
 	const [error, setError] = useState<Error>()
 	const [isSuccessful, setIsSuccessful] = useState<boolean | null>(null)
 
-	const fetchFunction = (idOrBody?: Id | Todo) => {
-		if ("GET_ALL" && !idOrBody) {
-			return getAll()
-		} else if (type === "GET_ONE" && idOrBody) {
-			return getOne(idOrBody as Id)
-		} else if (type === "DELETE" && idOrBody) {
-			return deleteOne(idOrBody as Id)
-		} else if (type === "POST" && idOrBody) {
-			return postOne(idOrBody as Todo)
-		} else if (type === "PUT" && idOrBody) {
-			return putOne(idOrBody as Todo)
-		}
-	}
+	const fetchFunction = ({ id, todo, task }: (Partial<BodyOrIdOrTaskType>)) => 
+		(type === "GET_ALL")?
+			getAll() :
+		(type === "GET_ONE" && id) ? 
+			getOne(id) :
+		(type === "DELETE" && id) ?
+			deleteOne(id) :
+		(type === "POST" && task) ?
+			postOne(task) :
+		(type === "PUT" && todo) ?
+			putOne(todo) :
+		undefined
 
-	const callFetch = async (bodyOrId?: Id | Todo) => {
+	const callFetch = async (bodyOrIdOrTask: Partial<{ id: Id, todo: Todo, task: Task }>) => {
 		try {
-			const response = await fetchFunction(bodyOrId)
+			const response = await fetchFunction(bodyOrIdOrTask)
 			if (response!.ok) {
 				setIsSuccessful(true)
 			}
