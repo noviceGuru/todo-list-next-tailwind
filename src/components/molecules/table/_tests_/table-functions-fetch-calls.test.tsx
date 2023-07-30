@@ -45,6 +45,11 @@ test('deletes a row correctly', () => {
 	const newRow1 = within(table).queryByRole('row', {
 		name: new RegExp(`${testTodos.initalTodos[0].task} delete edit`, "i")
 	})
+
+	// Spinner appears successfully
+	const loadingSpinner = within(table).queryByText('Loading...')
+	waitFor(() => expect(loadingSpinner).toBeInTheDocument())
+
 	waitFor(() => expect(newRow1).not.toBeInTheDocument())
 })
 
@@ -81,6 +86,10 @@ test('edits a row correctly', async () => {
 	const cell1 = within(row1).findByRole('cell', {
 		name: new RegExp(testTodos.todosAfterModifiedRow1[0].task)
 	})
+
+	// Spinner appears successfully
+	const loadingSpinner = within(table).queryByText('Loading...')
+	waitFor(() => expect(loadingSpinner).toBeInTheDocument())
 
 	//edits successfully
 	waitFor(() => expect(cell1).toBeInTheDocument())
@@ -130,6 +139,10 @@ test('adds a row correctly', () => {
 	const added_edit_button = within(addedRow).queryByRole('button', {
 		name: /edit/i
 	})
+
+	// Spinner appears successfully
+	const loadingSpinner = within(table).queryByText('Loading...')
+	waitFor(() => expect(loadingSpinner).toBeInTheDocument())
 
 	waitFor(() => {
 		expect(addedCell).toHaveTextContent(testTodos.todosAfterOneRowAdded[2].task)
