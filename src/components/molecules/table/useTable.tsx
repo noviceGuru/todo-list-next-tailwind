@@ -26,13 +26,14 @@ export default function useTable(initialData: Todo[]) {
 			deletOneResetCache()
 
 			setIsNewRow(false)
-			setEditingKey(null)
 		}
 	}, [postOneData, putOneData, deleteOneIsSuccessful])
 
 	useEffect(() => {
 		if (getAllData) {
 			setTableRows(getAllData)
+			setEditingKey(null)
+			setError(undefined)
 		}
 	}, [getAllData])
 
