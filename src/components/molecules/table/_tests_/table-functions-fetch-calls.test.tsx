@@ -21,6 +21,8 @@ test("Table is rendered with presumedly fetched data", () => {
 	expect(table).toBeInTheDocument()
 })
 
+// SUCCESSFUL OPERATIONS
+
 test('deletes a row correctly', () => {
 	mswServer.use(mockApiCallHandlers.deleteFirstRow)
 
@@ -112,7 +114,7 @@ test('adds a row correctly', () => {
 	expect(addedInput).toHaveValue(testTodos.todosAfterOneRowAdded[2].task)
 
 	const added_discard_button = within(addedRow).getByRole('button', {
-		name: /save/i
+		name: /discard/i
 	})
 	const added_save_button = within(addedRow).getByRole('button', {
 		name: /save/i
@@ -136,4 +138,89 @@ test('adds a row correctly', () => {
 		expect(added_delete_button).toBeInTheDocument()
 		expect(added_edit_button).toBeInTheDocument()
 	})
+})
+
+// UNSUCCESSFUL OPERATIONS
+
+test('If delete call fails, shows the fail banner, does not delete the row', () => {
+	mswServer.use(mockApiCallHandlers.deleteFirstRowFail)
+
+	render(<Table
+		initialData={testTodos.initalTodos}
+	/>)
+
+	const table = screen.getByRole('table')
+	const row1 = within(table).getByRole('row', {
+		name: new RegExp(`${testTodos.initalTodos[0].task} delete edit`, "i")
+	})
+	const delete_button1 = within(row1).getByRole('button', {
+		name: /delete/i
+	})
+
+	act(() => fireEvent.click(delete_button1))
+
+	const failBanner = screen.getByText(/something went wrong\. try again please\./i)
+
+	expect(failBanner).toBeInTheDocument()
+	expect(row1).toBeInTheDocument()
+})
+
+test('If edit call fails, shows the fail banner, does not delete the row, stays in edit mode', () => {
+	mswServer.use(mockApiCallHandlers.putFirstRowFail)
+	
+	render(<Table
+		initialData={testTodos.initalTodos}
+	/>)
+
+	const table = screen.getByRole("table")
+	const row1 = within(table).getByRole('row', {
+		name: new RegExp(`${testTodos.initalTodos[0].task} delete edit`, "i")
+	})
+
+	const edit1 = within(row1).getByRole('button', {
+		name: /edit/i
+	})
+	fireEvent.click(edit1)
+	const input1 = within(row1).getByRole('textbox')
+	fireEvent.change(input1, { target: { value: testTodos.todosAfterModifiedRow1[0].task } })
+
+	const save_button1 = within(row1).getByRole('button', {
+		name: /save/i
+	})
+	
+	fireEvent.click(save_button1)
+
+	const failBanner = screen.getByText(/something went wrong\. try again please\./i)
+	
+	expect(failBanner).toBeInTheDocument()
+	expect(input1).toHaveValue(testTodos.todosAfterModifiedRow1[0].task)
+})
+
+test('If Add call fails, shows the fail banner, does not delete the row, stays in edit mode', () => {
+	mswServer.use(mockApiCallHandlers.addARowFail)
+	render(<Table
+		initialData={testTodos.initalTodos}
+	/>)
+
+	const table = screen.getByRole("table")
+	const addNewButton = within(table).getByRole('button', { name: /add new/i })
+	fireEvent.click(addNewButton)
+
+	const addedRow = within(table).getByRole('row', {
+		name: /save discard/i
+	})
+
+	const addedInput = within(addedRow).getByRole('textbox')
+	fireEvent.change(addedInput, { target: { value: testTodos.todosAfterOneRowAdded[2].task } })
+
+	const added_save_button = within(addedRow).getByRole('button', {
+		name: /save/i
+	})
+	
+	fireEvent.click(added_save_button)
+
+	const failBanner = screen.getByText(/something went wrong\. try again please\./i)
+	
+	expect(failBanner).toBeInTheDocument()
+	expect(addedInput).toHaveValue(testTodos.todosAfterOneRowAdded[2].task)
 })
