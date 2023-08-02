@@ -57,6 +57,7 @@ export default function useTable(initialData: Todo[]) {
 	const edit = (row: Todo) => {
 		setEditingKey(row.id)
 		setTaskText(row.task)
+		setIsNewRow(false)
 	}
 
 	const discard = () => {
@@ -67,7 +68,8 @@ export default function useTable(initialData: Todo[]) {
 				return newRows
 			})
 		}
-
+		
+		setIsNewRow(false)
 		setEditingKey(null)
 	}
 

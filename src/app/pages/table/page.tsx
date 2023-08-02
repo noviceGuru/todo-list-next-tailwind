@@ -6,7 +6,7 @@ export default async function TablePage() {
 
   return (<>
     <title>Todo list</title>
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex h-screen w-screen items-center justify-center">
       {(response.data && !response.error) ?
       <Table initialData={response && response.data || []} /> :
       <h3>Failed to get the data</h3>
