@@ -7,7 +7,7 @@ export default function Input({ onChange, value, defaultValue, placeholder }: In
 			onChange={onChange}
 			value={value}
 			defaultValue={defaultValue}
-			className="block w-full border-solid border-2 border-orange-500 rounded box-border"
+			className="block w-full border-solid border-2 border-orange-500 rounded box-border pl-1"
 		/>
 	)
 }
