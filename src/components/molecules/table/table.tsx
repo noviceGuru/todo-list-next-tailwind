@@ -30,11 +30,13 @@ export default function Table({ initialData }: { initialData: Todo[] }) {
 
 	return (
 		<>
+			<div className="h-44 flex">
 			{errorSaving &&
 				<ErrorBanner
 					size="medium"
 					text="Something went wrong. Try again please."
 				/>}
+				</div>
 			<table className="table-fixed min-w-360px w-96 sm:w-3/5 xl:w-2/5 ">
 				<thead className="table-header-group">
 					<tr>
