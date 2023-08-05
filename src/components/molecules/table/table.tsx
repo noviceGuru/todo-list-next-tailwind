@@ -31,12 +31,12 @@ export default function Table({ initialData }: { initialData: Todo[] }) {
 	return (
 		<>
 			<div className="h-44 flex">
-			{errorSaving &&
-				<ErrorBanner
-					size="medium"
-					text="Something went wrong. Try again please."
-				/>}
-				</div>
+				{errorSaving &&
+					<ErrorBanner
+						size="medium"
+						text="Something went wrong. Try again please."
+					/>}
+			</div>
 			<table className="table-fixed min-w-360px w-96 sm:w-3/5 xl:w-2/5 ">
 				<thead className="table-header-group">
 					<tr>
@@ -62,8 +62,10 @@ export default function Table({ initialData }: { initialData: Todo[] }) {
 						tableRows.map((row, index) =>
 							editingKey === row.id ?
 								isLoading ?
-									<tr>
-										<LoadingSpinner />
+									<tr className={`group w-full h-11 flex ${(index === tableRows.length - 1) ? '' : 'border-b-2'}`} key={row.id}>
+										<td className="tl-2 grow min-w-0 self-center h-12">
+											<LoadingSpinner />
+										</td>
 									</tr> :
 									<tr className={`group w-full flex ${(index === tableRows.length - 1)? '' : 'border-b-2'}`} key={row.id}>
 										<td className="group w-full flex">
