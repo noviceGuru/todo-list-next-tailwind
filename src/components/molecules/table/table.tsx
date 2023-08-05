@@ -63,7 +63,7 @@ export default function Table({ initialData }: { initialData: Todo[] }) {
 							editingKey === row.id ?
 								isLoading ?
 									<tr className={`group w-full h-11 flex ${(index === tableRows.length - 1) ? '' : 'border-b-2'}`} key={row.id}>
-										<td className="tl-2 grow min-w-0 self-center h-12">
+										<td className="tl-2 min-w-0 flex self-center h-12">
 											<LoadingSpinner />
 										</td>
 									</tr> :

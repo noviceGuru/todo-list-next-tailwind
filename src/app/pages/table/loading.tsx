@@ -2,5 +2,7 @@
 import LoadingSpinner from "@/components/atoms/loading-spinner/loading-spinner";
 
 export default async function Loading() {
-	return <LoadingSpinner/>
+	return <main className="h-screen-dynamic grid place-items-center">
+		<LoadingSpinner />
+	</main>
 }

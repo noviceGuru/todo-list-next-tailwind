@@ -1,5 +1,7 @@
 export default function LoadingSpinner({ type }: { type?: "ping" | "spin" | "pulse" | "bounce" }) {
-	return <span className={`bg-indigo-300 p-2 rounded-md animate-${type? type : "pulse"}`}>
+	const animationClass =`animate-${type? type : "ping"}`
+
+	return <span className={`bg-indigo-300 self-center py-1 px-4 rounded-md ${animationClass}`}>
 		Loading...
 	</span>
 }
