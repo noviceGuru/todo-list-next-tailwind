@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`If passed a "pulse" type, will have "animate-pulse" class 1`] = `
+<span
+  class="bg-indigo-300 self-center py-1 px-4 rounded-md animate-pulse"
+>
+  Loading...
+</span>
+`;
+
+exports[`With no type, will have "animate-ping" class 1`] = `
+<span
+  class="bg-indigo-300 self-center py-1 px-4 rounded-md animate-ping"
+>
+  Loading...
+</span>
+`;
