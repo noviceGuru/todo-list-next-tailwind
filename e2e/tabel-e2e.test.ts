@@ -19,7 +19,9 @@ test('Adds a task successfully', async ({ page }) => {
 		}
 	})
 
-	const addButton = await page.getByRole('button', { name: /add new/i })
+	const addButton = await page.getByRole('button', {
+		name: /add\-button/i
+	})
 	await expect(addButton).toBeVisible()
 
 	addButton.click()
@@ -31,7 +33,7 @@ test('Adds a task successfully', async ({ page }) => {
 	await inputTextArea.clear()
 	await inputTextArea.fill(testTodos.todosAfterOneRowAdded[2].task)
 
-	const saveButton = await page.getByRole('button', { name: /save/i })
+	const saveButton = await page.getByRole('button', { name: /save\-button/i })
 
 	await expect(saveButton).toBeVisible()
 
@@ -63,12 +65,12 @@ test('Edits a task successfully', async ({ page }) => {
 
 	const edit = await page.getByRole('table')
 		.getByRole('row', { name: 'write tests' })
-		.getByRole('button', { name: /edit/i })
+		.getByRole('button', { name: /edit\-button/i })
 
 
 	await edit.click()
 
-	const save = await page.getByRole('button', {name: /save/i})
+	const save = await page.getByRole('button', { name: /save\-button/i })
 	const input = page.getByRole('textbox')
 	await input.fill(testTodos.todosAfterModifiedRow1[0].task)
 
@@ -94,11 +96,13 @@ test('Deletes a task successfully', async ({ page }) => {
 	
 	await page.route(`${BASE_FETCH_URL}/*`, route => {
 		if (route.request().method() === 'DELETE') {
-			return route.fulfill()
+			return route.fulfill({
+				body: JSON.stringify(testTodos.todosAfterDeleteTodo1)
+			})
 		}
 	})
 
-	const delete_button1 = await page.getByRole("button", { name: /delete/i }).first()
+	const delete_button1 = await page.getByRole("button", { name: /delete\-button/i }).first()
 	await expect(await delete_button1).toBeVisible()
 	
 	await delete_button1.click()
