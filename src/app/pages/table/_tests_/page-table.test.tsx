@@ -43,9 +43,7 @@ test('after failed fetch, doesn\'t render empty table and renders the error elem
 	)
 
 	const pageTable = screen.queryByRole('table')
-	const failedNote = screen.getByRole('heading', {
-		name: /failed to get the data/i
-	  })
+	const failedNote = screen.getByText(/failed to get the data/i)
 
 	expect(pageTable).not.toBeInTheDocument()
 	expect(failedNote).toBeInTheDocument()

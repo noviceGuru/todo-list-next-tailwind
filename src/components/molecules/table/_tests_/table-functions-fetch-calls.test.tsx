@@ -35,10 +35,10 @@ test('deletes a row correctly', () => {
 
 	const table = screen.getByRole("table")
 	const row1 = within(table).getByRole('row', {
-		name: new RegExp(`${testTodos.initalTodos[0].task} delete edit`, "i")
+		name: new RegExp(`${testTodos.initalTodos[0].task} delete\-button edit\-button`, "i")
 	})
 	const delete_button1 = within(row1).getByRole('button', {
-		name: /delete/i
+		name: /delete\-button/i
 	})
 
 	act(()=>fireEvent.click(delete_button1))
@@ -65,7 +65,7 @@ test('edits a row correctly', async () => {
 
 	const table = screen.getByRole("table")
 	const row1 = within(table).getByRole('row', {
-		name: new RegExp(`${testTodos.initalTodos[0].task} delete edit`, "i")
+		name: new RegExp(`${testTodos.initalTodos[0].task} delete\-button edit\-button`, "i")
 	})
 
 	const edit1 = within(row1).getByRole('button', {
@@ -80,7 +80,7 @@ test('edits a row correctly', async () => {
 
 	
 	const save_button1 = within(row1).getByRole('button', {
-		name : /save/i
+		name : /save\-button/i
 	})
 	fireEvent.click(save_button1)
 	const cell1 = within(row1).findByRole('cell', {
@@ -106,12 +106,10 @@ test('adds a row correctly', () => {
 	/>)
 
 	const table = screen.getByRole("table")
-	const addNewButton = within(table).getByRole('button', { name: /add new/i })
+	const addNewButton = within(table).getByRole('button', { name: /add\-button/i })
 	fireEvent.click(addNewButton)
 
-	const addedRow = within(table).getByRole('row', {
-		name: /save discard/i
-	})
+	const addedRow = within(table).getByRole('row', {  name: /discard\-button save\-button/i})
 
 	// New row is rendered
 	expect(addedRow).toBeInTheDocument()
@@ -164,7 +162,7 @@ test('If delete call fails, shows the fail banner, does not delete the row', () 
 
 	const table = screen.getByRole('table')
 	const row1 = within(table).getByRole('row', {
-		name: new RegExp(`${testTodos.initalTodos[0].task} delete edit`, "i")
+		name: new RegExp(`${testTodos.initalTodos[0].task} delete\-button edit\-button`, "i")
 	})
 	const delete_button1 = within(row1).getByRole('button', {
 		name: /delete/i
@@ -187,7 +185,7 @@ test('If edit call fails, shows the fail banner, does not delete the row, stays 
 
 	const table = screen.getByRole("table")
 	const row1 = within(table).getByRole('row', {
-		name: new RegExp(`${testTodos.initalTodos[0].task} delete edit`, "i")
+		name: new RegExp(`${testTodos.initalTodos[0].task} delete\-button edit\-button`, "i")
 	})
 
 	const edit1 = within(row1).getByRole('button', {
@@ -216,12 +214,10 @@ test('If Add call fails, shows the fail banner, does not delete the row, stays i
 	/>)
 
 	const table = screen.getByRole("table")
-	const addNewButton = within(table).getByRole('button', { name: /add new/i })
+	const addNewButton = within(table).getByRole('button', { name: /add\-button/i })
 	fireEvent.click(addNewButton)
 
-	const addedRow = within(table).getByRole('row', {
-		name: /save discard/i
-	})
+	const addedRow = within(table).getByRole('row', { name: /discard\-button save\-button/i })
 
 	const addedInput = within(addedRow).getByRole('textbox')
 	fireEvent.change(addedInput, { target: { value: testTodos.todosAfterOneRowAdded[2].task } })

@@ -2,7 +2,7 @@
 
 exports[`renders Input with the correct text and looks 1`] = `
 <input
-  class="border-solid border-2 border-orange-500 rounded"
+  class="block w-full border-solid border-2 border-orange-500 rounded box-border pl-1"
   value="default dummy text for input"
 />
 `;

@@ -2,45 +2,110 @@
 
 exports[`renders the add button with the correct name and looks 1`] = `
 <button
-  class="border-2 rounded-md m-1 border-indigo-300 bg-indigo-300"
+  class="p-2 rounded-full w-10 h-10 disabled:opacity-50 disabled:cursor-not-allowed
+			 bg-blue-300 hover:bg-blue-400"
+  data-testid="button-add"
   type="button"
 >
-  Add new
+  <img
+    alt="add-button"
+    class="w-full"
+    data-nimg="1"
+    decoding="async"
+    height="40"
+    loading="lazy"
+    src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+    srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+    style="color: transparent;"
+    width="40"
+  />
 </button>
 `;
 
 exports[`renders the add button with the correct name and looks 2`] = `
 <button
-  class="border-2 rounded-md m-1 bg-red-600 border-red-300"
+  class="p-2 rounded-full w-10 h-10 disabled:opacity-50 disabled:cursor-not-allowed
+			 bg-red-400 border-red-400 hover:bg-red-600"
+  data-testid="button-delete"
   type="button"
 >
-  Delete
+  <img
+    alt="delete-button"
+    class="w-full"
+    data-nimg="1"
+    decoding="async"
+    height="40"
+    loading="lazy"
+    src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+    srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+    style="color: transparent;"
+    width="40"
+  />
 </button>
 `;
 
 exports[`renders the add button with the correct name and looks 3`] = `
 <button
-  class="border-2 rounded-md m-1 border-indigo-300 bg-indigo-300"
+  class="p-2 rounded-full w-10 h-10 disabled:opacity-50 disabled:cursor-not-allowed
+			 bg-blue-300 hover:bg-blue-400"
+  data-testid="button-save"
   type="button"
 >
-  Save
+  <img
+    alt="save-button"
+    class="w-full"
+    data-nimg="1"
+    decoding="async"
+    height="40"
+    loading="lazy"
+    src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+    srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+    style="color: transparent;"
+    width="40"
+  />
 </button>
 `;
 
 exports[`renders the add button with the correct name and looks 4`] = `
 <button
-  class="border-2 rounded-md m-1 border-indigo-300 bg-indigo-300"
+  class="p-2 rounded-full w-10 h-10 disabled:opacity-50 disabled:cursor-not-allowed
+			 bg-blue-300 hover:bg-blue-400"
+  data-testid="button-discard"
   type="button"
 >
-  Discard
+  <img
+    alt="discard-button"
+    class="w-full"
+    data-nimg="1"
+    decoding="async"
+    height="40"
+    loading="lazy"
+    src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+    srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+    style="color: transparent;"
+    width="40"
+  />
 </button>
 `;
 
 exports[`renders the add button with the correct name and looks 5`] = `
 <button
-  class="border-2 rounded-md m-1 border-indigo-300 bg-indigo-300"
+  class="p-2 rounded-full w-10 h-10 disabled:opacity-50 disabled:cursor-not-allowed
+			 bg-blue-300 hover:bg-blue-400"
+  data-testid="button-edit"
   type="button"
 >
-  Edit
+  <img
+    alt="edit-button"
+    class="w-full"
+    data-nimg="1"
+    decoding="async"
+    height="40"
+    loading="lazy"
+    src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+    srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+    style="color: transparent;"
+    width="40"
+  />
 </button>
 `;

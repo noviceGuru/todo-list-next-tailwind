@@ -12,7 +12,7 @@ test('by clicking edit, cell becomes an input, save and discard buttons appear i
 
 	const table = screen.getByRole('table')
 	const row1 = within(table).getByRole('row', {
-		name: 'write tests Delete Edit'
+		name: 'write tests delete\-button edit\-button'
 	})
 
 	const delete_button_1 = within(row1).getByRole('button', {
@@ -57,7 +57,7 @@ test('by clicking edit, the other row does not change', () => {
 
 	const table = screen.getByRole('table')
 	const row1 = within(table).getByRole('row', {
-		name: 'write tests Delete Edit'
+		name: 'write tests delete\-button edit\-button'
 	})
 
 	const edit_button_1 = within(row1).getByRole('button', {
@@ -67,7 +67,7 @@ test('by clicking edit, the other row does not change', () => {
 	fireEvent.click(edit_button_1)
 
 	const row2 = screen.getByRole('row', {
-		name: /make the storybook delete edit/i
+		name: /make the storybook delete\-button edit\-button/i
 	})
 
 	const textCell = within(row2).getByRole('cell', {

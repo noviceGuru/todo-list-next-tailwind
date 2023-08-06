@@ -26,7 +26,7 @@ it('renders initial buttons (delete and edit) correctly', () => {
 
 	const table = screen.getByRole('table')
 	const row1 = within(table).getByRole('row', {
-		name: 'write tests Delete Edit'
+		name: /write tests delete\-button edit\-button/i
 	})
 
 	const button_delete1 = within(row1).getByRole('button', {
@@ -42,7 +42,7 @@ it('renders initial buttons (delete and edit) correctly', () => {
 
 
 	const row2 = within(table).getByRole('row', {
-		name: 'write tests Delete Edit'
+		name: /write tests delete\-button edit\-button/i
 	})
 
 	const button_delete2 = within(row2).getByRole('button', {

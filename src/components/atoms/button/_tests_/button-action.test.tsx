@@ -9,8 +9,8 @@ it('onClick performs correctly the dummy function passed to the button', () => {
 		type='add'
 		onClick={() => console.log('The button is logging the onclick function')}
 	/>)
-	
-	const button = screen.getByRole('button', { name: /Add new/i })
+
+	const button = screen.getByTestId('button-add')
 	fireEvent.click(button)
 
 	expect(logSpy).toHaveBeenCalledWith('The button is logging the onclick function')

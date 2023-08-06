@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders cell with the correct text and looks 1`] = `
-<span>
+<span
+  class="truncate block min-w-0"
+>
   cell fake text
 </span>
 `;

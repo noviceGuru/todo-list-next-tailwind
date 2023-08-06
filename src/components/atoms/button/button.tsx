@@ -6,7 +6,7 @@ import SaveIcon from '@/assets/icons/save-icon.svg'
 import DiscardIcon from '@/assets/icons/discard-icon.svg'
 import AddIcon from '@/assets/icons/add-icon.svg'
 
-export default function Button({ type, onClick, disabled }: ButtonProps) {
+export default function Button({ type, onClick, disabled, testId }: ButtonProps) {
 	const buttonText = {
 		add: AddIcon,
 		delete: DeleteIcon,
@@ -18,6 +18,7 @@ export default function Button({ type, onClick, disabled }: ButtonProps) {
 	return (
 		<button
 			type="button"
+			data-testid={testId? testId: `button-${type}`}
 			onClick={onClick}
 			className={`p-2 rounded-full w-10 h-10 disabled:opacity-50 disabled:cursor-not-allowed
 			 ${type === 'delete' ? `bg-red-400 border-red-400 hover:bg-red-600` :

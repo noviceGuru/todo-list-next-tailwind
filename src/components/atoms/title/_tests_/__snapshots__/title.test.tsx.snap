@@ -1,7 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renderes title correctly with the correct looks 1`] = `
-<th>
-  dummy text title to test
-</th>
+<tr>
+  <span
+    class=" flex pt-2 pl-3"
+  >
+    dummy text title to test
+  </span>
+</tr>
 `;

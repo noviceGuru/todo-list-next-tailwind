@@ -2,79 +2,154 @@
 
 exports[`the table renders row correctly with the data and correct looks 1`] = `
 <table
-  class="border-2 w-96"
+  class="table-fixed min-w-360px w-96 sm:w-3/5 xl:w-2/5 "
 >
-  <thead>
-    <tr
-      class="border-2 border-black rounded"
-    >
-      <th>
-        a todo table
-      </th>
-      <td
-        class="border-l-2 border-black flex justify-center"
+  <thead
+    class="table-header-group"
+  >
+    <tr>
+      <th
+        class="flex mb-4"
       >
-        <button
-          class="border-2 rounded-md m-1 border-indigo-300 bg-indigo-300"
-          type="button"
+        <span
+          class="bg-gradient-to-r from-indigo-500 rounded-lg grow text-white flex pt-2 pl-3"
         >
-          Add new
-        </button>
-      </td>
+          What you'll do today
+        </span>
+        <div
+          class="w-12"
+        >
+          <button
+            class="p-2 rounded-full w-10 h-10 disabled:opacity-50 disabled:cursor-not-allowed
+			 bg-blue-300 hover:bg-blue-400"
+            data-testid="button-add"
+            type="button"
+          >
+            <img
+              alt="add-button"
+              class="w-full"
+              data-nimg="1"
+              decoding="async"
+              height="40"
+              loading="lazy"
+              src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+              srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+              style="color: transparent;"
+              width="40"
+            />
+          </button>
+        </div>
+      </th>
     </tr>
   </thead>
   <tbody>
     <tr
-      class="border-2 border-indigo-400 "
+      class="group w-full flex border-b-2"
     >
       <td
-        class="border-4 border-pink-900 pl-2"
+        class="pl-2 grow min-w-0 self-center"
       >
-        <span>
+        <span
+          class="truncate block min-w-0"
+        >
           write tests
         </span>
       </td>
       <td
-        class="border-4 border-pink-800 bg-slate-300 w-32"
+        class="w-22 flex gap-1 justify-around opacity-0 transition-opacity ease-in duration-200 group-hover:opacity-100"
       >
         <button
-          class="border-2 rounded-md m-1 bg-red-600 border-red-300"
+          class="p-2 rounded-full w-10 h-10 disabled:opacity-50 disabled:cursor-not-allowed
+			 bg-red-400 border-red-400 hover:bg-red-600"
+          data-testid="button-delete"
           type="button"
         >
-          Delete
+          <img
+            alt="delete-button"
+            class="w-full"
+            data-nimg="1"
+            decoding="async"
+            height="40"
+            loading="lazy"
+            src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+            srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+            style="color: transparent;"
+            width="40"
+          />
         </button>
         <button
-          class="border-2 rounded-md m-1 border-indigo-300 bg-indigo-300"
+          class="p-2 rounded-full w-10 h-10 disabled:opacity-50 disabled:cursor-not-allowed
+			 bg-blue-300 hover:bg-blue-400"
+          data-testid="button-edit"
           type="button"
         >
-          Edit
+          <img
+            alt="edit-button"
+            class="w-full"
+            data-nimg="1"
+            decoding="async"
+            height="40"
+            loading="lazy"
+            src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+            srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+            style="color: transparent;"
+            width="40"
+          />
         </button>
       </td>
     </tr>
     <tr
-      class="border-2 border-indigo-400 "
+      class="group w-full flex "
     >
       <td
-        class="border-4 border-pink-900 pl-2"
+        class="pl-2 grow min-w-0 self-center"
       >
-        <span>
+        <span
+          class="truncate block min-w-0"
+        >
           make the storybook
         </span>
       </td>
       <td
-        class="border-4 border-pink-800 bg-slate-300 w-32"
+        class="w-22 flex gap-1 justify-around opacity-0 transition-opacity ease-in duration-200 group-hover:opacity-100"
       >
         <button
-          class="border-2 rounded-md m-1 bg-red-600 border-red-300"
+          class="p-2 rounded-full w-10 h-10 disabled:opacity-50 disabled:cursor-not-allowed
+			 bg-red-400 border-red-400 hover:bg-red-600"
+          data-testid="button-delete"
           type="button"
         >
-          Delete
+          <img
+            alt="delete-button"
+            class="w-full"
+            data-nimg="1"
+            decoding="async"
+            height="40"
+            loading="lazy"
+            src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+            srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+            style="color: transparent;"
+            width="40"
+          />
         </button>
         <button
-          class="border-2 rounded-md m-1 border-indigo-300 bg-indigo-300"
+          class="p-2 rounded-full w-10 h-10 disabled:opacity-50 disabled:cursor-not-allowed
+			 bg-blue-300 hover:bg-blue-400"
+          data-testid="button-edit"
           type="button"
         >
-          Edit
+          <img
+            alt="edit-button"
+            class="w-full"
+            data-nimg="1"
+            decoding="async"
+            height="40"
+            loading="lazy"
+            src="/_next/image?url=%2Fimg.jpg&w=96&q=75"
+            srcset="/_next/image?url=%2Fimg.jpg&w=48&q=75 1x, /_next/image?url=%2Fimg.jpg&w=96&q=75 2x"
+            style="color: transparent;"
+            width="40"
+          />
         </button>
       </td>
     </tr>

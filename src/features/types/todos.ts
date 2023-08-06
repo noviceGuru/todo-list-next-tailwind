@@ -22,6 +22,7 @@ export type ButtonProps = {
 	type: ButtonTypes
 	onClick?: () => void
 	disabled?: boolean
+	testId?: string
 }
 
 export type PostAndPutResponse = {

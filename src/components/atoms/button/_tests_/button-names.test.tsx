@@ -1,41 +1,21 @@
 import { render, screen } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
 import Button from "../button"
 
 import { ButtonTypes } from '@/features/types/todos'
 
-const buttonsTypesAndExpectedTexts: { type: ButtonTypes, text: string }[] = [
-	{
-		type: 'add',
-		text: 'Add new'
-	},
-	{
-		type: 'delete',
-		text: 'Delete'
-	},
-	{
-		type: 'save',
-		text: 'Save'
-	},
-	{
-		type: 'discard',
-		text: 'Discard'
-	},
-	{
-		type: 'edit',
-		text: 'Edit'
-	}
-]
+const buttonsTypesAndExpectedTexts: ButtonTypes[] = ['add', 'delete', 'save', 'discard', 'edit']
 
-buttonsTypesAndExpectedTexts.forEach(typeAndName => {
+buttonsTypesAndExpectedTexts.forEach(type => {
 	it('renders the add button with the correct name and looks', () => {
 		render(
 			<Button
-				type={typeAndName.type}
+				type={type}
 			/>)
-		const button = screen.getByRole('button')
+		const button = screen.getByTestId(`button-${type}`)
 
-		expect(button.textContent).toBe(typeAndName.text)
+		expect(button).toBeInTheDocument()
 		expect(button).toMatchSnapshot()
 	})
 })
