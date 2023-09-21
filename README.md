@@ -1,5 +1,5 @@
 # Description
-A todo list, written using `NextJS` and `TailwindCSS`, tested with `React Testing Library` and `Jest` and `ms` to mock the fetch calls, for unit and integrated tests, and `Playwright` for end to end test.
+A todo list, written using `NextJS` and `TailwindCSS`, tested with `React Testing Library` and `Jest` and `msw` to mock the fetch calls, for unit and integrated tests, and `Playwright` for end to end test.
 
 <br/>
 
