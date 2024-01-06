@@ -9,7 +9,7 @@ test('Root to have the right title', async ({ page }) => {
 
 test('Clicking on the button, takes to the table\'s page', async ({ page }) => {
 	await page.goto(BASE_ROOT_URL)
-	const button = page.getByRole('link', { name: /go to table/i })
+	const button = page.getByRole('link', { name: /go to the table/i })
 	button.click()
 
 	await expect(page).toHaveURL(`${BASE_ROOT_URL}pages/table`)

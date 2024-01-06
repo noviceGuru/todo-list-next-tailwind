@@ -7,7 +7,7 @@ export default function Home() {
 			<main className="h-screen-dynamic grid place-items-center">
 				<LinkButton
 					to="pages/table"
-					text="Go To Table"
+					text="Go To the Table"
 				/>
 			</main>
 		</>
