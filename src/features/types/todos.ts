@@ -11,6 +11,7 @@ export type Task = {
 
 export type InputProps = {
 	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+	OnEnter: () => void
 	value?: string
 	defaultValue?: string
 	placeholder?: string

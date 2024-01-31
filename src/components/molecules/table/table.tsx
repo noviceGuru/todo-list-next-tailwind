@@ -71,6 +71,7 @@ export default function Table({ initialData }: { initialData: Todo[] }) {
 										<td className="group w-full flex">
 											<Input
 												onChange={e => setTaskText(e.target.value)}
+												OnEnter={()=>save(row.id)}
 												value={taskText}
 											/>
 										</td>
