@@ -1,5 +1,4 @@
 import { Id, Todo } from "@/features/types/todos"
-import fetch from "node-fetch"
 
 export async function getTodos(url: URL) {
 	let response : {
@@ -11,7 +10,7 @@ export async function getTodos(url: URL) {
 	}
 
 	try {
-		const res = await fetch(url)
+		const res = await fetch(url, {cache: 'no-store'})
 		if (!res.ok) {
 			throw new Error('Failed to fetch todos')
 		}
